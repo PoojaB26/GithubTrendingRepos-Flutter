@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'api_services.dart';
+import 'repo_model.dart';
 
 class GithubHome extends StatelessWidget{
   @override
@@ -11,13 +13,21 @@ class GithubHome extends StatelessWidget{
         title: Text('Trending Repositories'),
         centerTitle: true,
       ),
-      body: Container(
-        child: ListView.builder(
-            itemCount: 3,
-            itemBuilder: (context, index){
-              return RepoCard();
-            }),
-      ),
+      body: FutureBuilder<RepoList>(
+          future: getRepositories(),
+          builder: (BuildContext context,  snapshot){
+          if(snapshot.hasData){
+            print(snapshot.data.repoList[0].username);
+            return
+              Container(
+                child: ListView.builder(
+                    itemCount: snapshot.data.repoList.length,
+                    itemBuilder: (context, index){
+                      return RepoCard();
+                    }),
+              );
+          }
+      })
     );
   }
 
