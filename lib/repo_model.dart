@@ -32,6 +32,7 @@ class RepoListItem{
 
     return new RepoListItem(
         username: json['username'],
+        avatar: json['avatar'],
         repos: Repo.fromJson(json['repo'])
     );
   }
