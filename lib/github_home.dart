@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'api_services.dart';
-import 'repo_model.dart';
+import 'package:trending_github/api_services.dart';
+import 'package:trending_github/repo_model.dart';
 
 class GithubHome extends StatelessWidget{
   @override
@@ -32,7 +32,6 @@ class GithubHome extends StatelessWidget{
   }
 
 }
-
 
 class RepoCard extends StatelessWidget{
 
@@ -86,5 +85,4 @@ class RepoCard extends StatelessWidget{
       ),
     );
   }
-
 }
