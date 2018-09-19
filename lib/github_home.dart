@@ -7,36 +7,36 @@ class GithubHome extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey[800],
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey[800],
-        elevation: 0.0,
-        title: Text('Trending Repositories'),
-        centerTitle: true,
-      ),
-      body: FutureBuilder<RepoList>(
-          future: getRepositories(),
-          builder: (BuildContext context,  snapshot){
-          if(snapshot.hasData){
-            print(snapshot.data.repoList[0].username);
-            return
-              Container(
-                child: ListView.builder(
-                    itemCount: snapshot.data.repoList.length,
-                    itemBuilder: (context, index){
-                      return RepoCard(
-                        repoItem: snapshot.data.repoList[index],
-                      );
-                    }),
-              );
-          }else if(snapshot.hasError){
-            return Center(child: Text("Error"),);
-          }
-          else{
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-      })
+        appBar: AppBar(
+          backgroundColor: Colors.blueGrey[800],
+          elevation: 0.0,
+          title: Text('Trending Repositories'),
+          centerTitle: true,
+        ),
+        body: FutureBuilder<RepoList>(
+            future: getRepositories(),
+            builder: (BuildContext context,  snapshot){
+              if(snapshot.hasData){
+                print(snapshot.data.repoList[0].username);
+                return
+                  Container(
+                    child: ListView.builder(
+                        itemCount: snapshot.data.repoList.length,
+                        itemBuilder: (context, index){
+                          return RepoCard(
+                            repoItem: snapshot.data.repoList[index],
+                          );
+                        }),
+                  );
+              }else if(snapshot.hasError){
+                return Center(child: Text("Error"),);
+              }
+              else{
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            })
     );
   }
 
@@ -48,8 +48,8 @@ class RepoCard extends StatelessWidget{
   final RepoListItem repoItem;
   RepoCard({
     this.repoItem
-});
-  
+  });
+
 
 
   @override
@@ -97,15 +97,15 @@ class RepoCard extends StatelessWidget{
       child: Card(
         color: Colors.white,
         child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _getAvatar(),
-                SizedBox(width: 10.0,),
-                _getRepoInfo(),
-              ],
-            ),
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _getAvatar(),
+              SizedBox(width: 10.0,),
+              _getRepoInfo(),
+            ],
+          ),
         ),
       ),
     );
