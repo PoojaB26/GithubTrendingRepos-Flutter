@@ -2,7 +2,9 @@
 
 *App built for Day 3 of Flutter Study Jam BBSR* <br>
 
-In this one, we are building a simple application that returns a List of Trending Github Repos by calling [this](https://github.com/huchenme/github-trending-api) API. The JSON parsing is done using dart:convert library in Flutter. 
+In this one, we are building a simple application that returns a List of Trending Github Repos by calling [this](https://github.com/huchenme/github-trending-api) API. The JSON parsing is done using dart:convert library in Flutter.
+
+*The entire development process is divided into three branches : PartOne, PartTwo, PartThree
 
 
 ## Screenshot 
