@@ -13,20 +13,23 @@ class GithubHome extends StatelessWidget{
         title: Text('Trending Repositories'),
         centerTitle: true,
       ),
-      body: FutureBuilder<RepoList>(
+      body: FutureBuilder<List<RepoList>>(
           future: getRepositories(),
           builder: (BuildContext context,  snapshot){
           if(snapshot.hasData){
-            print(snapshot.data.repoList[0].username);
+            print(snapshot.data[0].username);
             return
               Container(
                 child: ListView.builder(
-                    itemCount: snapshot.data.repoList.length,
+                    itemCount: snapshot.data.length,
                     itemBuilder: (context, index){
                       return RepoCard();
                     }),
               );
           }
+          else
+            return
+                CircularProgressIndicator();
       })
     );
   }
