@@ -1,57 +1,67 @@
-class RepoList{
-  List<RepoListItem> repoList;
+import 'dart:convert';
+
+List<RepoList> repoListFromJson(String str) {
+  final jsonData = json.decode(str);
+  return new List<RepoList>.from(jsonData.map((x) => RepoList.fromJson(x)));
+}
+
+String repoListToJson(List<RepoList> data) {
+  final dyn = new List<dynamic>.from(data.map((x) => x.toJson()));
+  return json.encode(dyn);
+}
+
+class RepoList {
+  String username;
+  String name;
+  String url;
+  String avatar;
+  Repo repo;
 
   RepoList({
-    this.repoList,
-});
-
-  factory RepoList.fromJson(List<dynamic> json){
-
-    List<RepoListItem> repos = new List<RepoListItem>();
-    repos = json.map((i)=>RepoListItem.fromJson(i)).toList();
-    return RepoList(
-      repoList: repos
-    );
-  }
-
-}
-
-
-class RepoListItem{
-  String username;
-  String avatar;
-  Repo repos;
-
-  RepoListItem({
     this.username,
+    this.name,
+    this.url,
     this.avatar,
-    this.repos,
+    this.repo,
   });
 
-  factory RepoListItem.fromJson(Map<String, dynamic> json) {
+  factory RepoList.fromJson(Map<String, dynamic> json) => new RepoList(
+    username: json["username"],
+    name: json["name"],
+    url: json["url"],
+    avatar: json["avatar"],
+    repo: Repo.fromJson(json["repo"]),
+  );
 
-    return new RepoListItem(
-        username: json['username'],
-        avatar: json['avatar'],
-        repos: Repo.fromJson(json['repo'])
-    );
-  }
+  Map<String, dynamic> toJson() => {
+    "username": username,
+    "name": name,
+    "url": url,
+    "avatar": avatar,
+    "repo": repo.toJson(),
+  };
 }
 
-
-class Repo{
+class Repo {
   String name;
   String description;
+  String url;
 
   Repo({
     this.name,
-    this.description
-});
+    this.description,
+    this.url,
+  });
 
-  factory Repo.fromJson(Map<String, dynamic> json){
-    return new Repo(
-      name: json['name'],
-      description: json['description']
-    );
-  }
+  factory Repo.fromJson(Map<String, dynamic> json) => new Repo(
+    name: json["name"],
+    description: json["description"],
+    url: json["url"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "description": description,
+    "url": url,
+  };
 }

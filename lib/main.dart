@@ -12,9 +12,6 @@ class MyApp extends StatelessWidget{
       title: 'GitHub Trending Repos',
       debugShowCheckedModeBanner: false,
       home: GithubHome(),
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey
-      ),
     );
   }
 
