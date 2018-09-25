@@ -13,18 +13,18 @@ class GithubHome extends StatelessWidget{
           title: Text('Trending Repositories'),
           centerTitle: true,
         ),
-        body: FutureBuilder<RepoList>(
+        body: FutureBuilder<List<RepoList>>(
             future: getRepositories(),
             builder: (BuildContext context,  snapshot){
               if(snapshot.hasData){
-                print(snapshot.data.repoList[0].username);
+                print(snapshot.data[0].username);
                 return
                   Container(
                     child: ListView.builder(
-                        itemCount: snapshot.data.repoList.length,
+                        itemCount: snapshot.data.length,
                         itemBuilder: (context, index){
                           return RepoCard(
-                            repoItem: snapshot.data.repoList[index],
+                            repoItem: snapshot.data[index],
                           );
                         }),
                   );
@@ -45,7 +45,7 @@ class GithubHome extends StatelessWidget{
 
 class RepoCard extends StatelessWidget{
 
-  final RepoListItem repoItem;
+  final RepoList repoItem;
   RepoCard({
     this.repoItem
   });
@@ -81,11 +81,11 @@ class RepoCard extends StatelessWidget{
                   children: [
                     TextSpan(text: '${repoItem.username}/',
                         style:TextStyle(fontWeight: FontWeight.bold)),
-                    TextSpan(text: "${repoItem.repos.name}")
+                    TextSpan(text: "${repoItem.name}")
                   ]
               ),
             ),
-            Text(repoItem.repos.description)
+            Text(repoItem.repo.description)
           ],
         ),
       );
